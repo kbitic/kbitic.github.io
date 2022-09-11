@@ -1,0 +1,31 @@
+<css>
+<!-- "color:red;text-align:center" -->
+
+<!--   <style>
+    .blue-background{
+    background-color:blue;
+    } -->
+
+<!--  @media print {
+    .screen_only {
+    display: none;
+    }
+   }
+    @media (max-width -px) {
+      body {
+        background-color: yellow;
+        }
+    }
+    @media (min-width -px) and (max-width: -px) {
+      body {
+        background-color: green;
+        }
+    } -->
+
+<!-- class="blue-background" -->
+
+<!--  -->
+
+
+
+
