@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+
+      <link rel="stylesheet" href="listStyle.css">
+
+    </head>
+    <body>
+      <div class="container">
+        <h1> Task List </h1>
+
+        <form action="" class="todo-form">
+          <input type="text" class="todo-input" placeholder="Add a task">
+          <button type="submit" class="add-button">Add</button>
+        </form>
+
+        <div class="file-list">
+          <ul class="todo-items">
+
+          </ul>
+        </div>
+      </div>
+
+
+<script type="text/javascript">
+
+const todoForm = document.querySelector('.todo-form');
+
+const todoInput = document.querySelector('.todo-input');
+
+const todoItemsList = document.querySelector('.todo-items');
+
+let todos = [];
+todoForm.addEventListener('submit',
+function(event) {
+  event.preventDefault();
+  addTodo(todoInput.value);
+}
+);
+
+function addTodo(item) {
+  if(item !== ''){
+    const todo ={
+      id: Date.now(),
+      name: item,
+      completed: false
+    };
+
+todos.puse(todo);
+addToLocalStorage(todos);
+todoInput.value = '';
+  }
+}
+
+function renderTodos(todos) {
+  todoItemsList.innerHTML = '';
+  todos.forEach(function(item){
+    const checked = item.completed ? 'checked' : null;
+
+    const li = document.createElement('li');
+    li.setAttribute('class','item');
+    li.setAttribute('data-key', item.id);
+
+    if(item.completed == true) {
+      li.class.add('checked');
+    }
+
+li.innerHTML = `
+<input type='checkbox' class='checkbox' ${checked}>
+${item.name}
+<button class="delete-button">X</button>
+`;
+
+todoItemsList.append(li);
+
+});
+
+}
+
+function addToLocalStorage(todos){
+  localStorage.setItem('todos', JSON.stringify(todos));
+  renderTodos(todos);
+}
+
+function getFormLocalStorage(){
+  const reference = localStorage.getItem('todos');
+  if(reference){
+    todos = JSON.parse(reference);
+    renderTodos(todos);
+  }
+}
+function toggle(id){
+  todos.forEach(function(item){
+  if(item.id == id){
+    item.completed = !item.completed;
+  }
+});
+addToLocalStorage(todos);
+}
+function deleteTodo(id) {
+  todos = todos.filter(function(item){
+    return item.id != id;
+  })
+  addToLocalStorage();
+}
+getFormLocalStorage();
+
+todoItemsList.addEventListener('click', function(event){
+  if (event.target.type === 'checkbox'){
+    toggle(event.target.parentElement.getAttribute('data-key'));
+    }
+    if(event.target.classList.container('delete-button')){
+      deleteTodo(event.target.parentElement.getAttribute('data-key'));
+    }
+});
+//end
+
+</script>
+
+    </body>
+</html>
